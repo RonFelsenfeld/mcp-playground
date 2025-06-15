@@ -1,4 +1,4 @@
-import httpx
+from httpx import AsyncClient, HTTPStatusError
 
 from src.api.models.news_models import NewsResponse, ResponseStatus
 
@@ -12,12 +12,14 @@ async def get_latest_news(query: str, language: str) -> NewsResponse:
     params = get_news_params(query=query, language=language)
 
     try:
-        async with httpx.AsyncClient() as client:
+        async with AsyncClient() as client:
             response = await client.get(url=url, params=params)
             response.raise_for_status()
+    except HTTPStatusError as e:
+        app_logger.error(f"[HTTPError]: Fetching news failed - {str(e)}")
+        return NewsResponse(data=[], status=ResponseStatus.ERROR)
     except Exception as e:
-        error_message = str(e)
-        app_logger.error(error_message)
+        app_logger.error(f"[Error]: Fetching news failed - {str(e)}")
         return NewsResponse(data=[], status=ResponseStatus.ERROR)
     else:
         result = response.json()
