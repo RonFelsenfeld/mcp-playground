@@ -1,18 +1,15 @@
 import httpx
-import json
 
 from src.api.models.news_models import NewsResponse, ResponseStatus
 
-from config import NEWS_API_KEY
 from src.configs.logger_config import app_logger
 
-from src.utils.news_utils import normalize_news_data
+from src.utils.news_utils import get_news_params, normalize_news_data
 
 
-async def get_root() -> NewsResponse:
-    query = "Israel-Iran-War"
+async def get_latest_news(query: str, language: str) -> NewsResponse:
     url = f"https://newsdata.io/api/1/latest"
-    params = {"apikey": NEWS_API_KEY, "q": query, "language": "en"}
+    params = get_news_params(query=query, language=language)
 
     try:
         async with httpx.AsyncClient() as client:
