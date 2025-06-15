@@ -14,6 +14,7 @@ async def get_latest_news(query: str, language: str) -> NewsResponse:
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get(url=url, params=params)
+            response.raise_for_status()
     except Exception as e:
         error_message = str(e)
         app_logger.error(error_message)
