@@ -1,5 +1,12 @@
 from pydantic import BaseModel
+from enum import Enum
 
 
-class Message(BaseModel):
+class ResponseStatus(Enum):
+    SUCCESS = "success"
+    ERROR = "error"
+
+
+class BasicResponse(BaseModel):
     message: str
+    status: ResponseStatus

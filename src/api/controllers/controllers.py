@@ -1,5 +1,5 @@
-from src.api.models.models import Message
+from src.api.models.models import BasicResponse, ResponseStatus
 
 
-def get_root():
-    return Message(message="Hello World")
+async def get_root():
+    return BasicResponse(message="Hello World", status=ResponseStatus.SUCCESS)

@@ -5,6 +5,6 @@ router = APIRouter()
 from src.api.controllers.controllers import get_root
 
 
-@router.get("/")
+@router.get(path="/")
 async def root():
-    return get_root()
+    return await get_root()
