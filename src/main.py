@@ -1,8 +1,12 @@
-from fastapi import FastAPI
-from src.api.routes.news_routes import news_router
+from mcp.server.fastmcp import FastMCP
 
-API_PREFIX = "/api"
+from src.example_weather_mcp.tools import get_weather_alerts, get_forecast
 
-app = FastAPI()
+mcp = FastMCP("weather")
 
-app.include_router(prefix=API_PREFIX, router=news_router)
+# Weather tools
+mcp.add_tool(get_weather_alerts)
+mcp.add_tool(get_forecast)
+
+if __name__ == "__main__":
+    mcp.run(transport="stdio")
