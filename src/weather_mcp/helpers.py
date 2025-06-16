@@ -3,7 +3,7 @@ from typing import Any
 
 from configs.logger_config import app_logger
 
-from src.example_weather_mcp.constants import USER_AGENT
+from src.weather_mcp.constants import USER_AGENT
 
 
 async def make_nws_request(url: str) -> dict[str, Any] | None:

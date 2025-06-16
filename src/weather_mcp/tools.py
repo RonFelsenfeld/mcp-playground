@@ -1,7 +1,7 @@
 from configs.logger_config import app_logger
 
-from src.example_weather_mcp.constants import NWS_API_BASE, FORMAT_SEPARATOR
-from src.example_weather_mcp.helpers import (
+from src.weather_mcp.constants import NWS_API_BASE, FORMAT_SEPARATOR
+from src.weather_mcp.helpers import (
     make_nws_request,
     format_alert,
     format_forecast,
@@ -13,10 +13,10 @@ async def get_weather_alerts(state: str) -> str:
     Get weather alerts for a given US state.
 
     Args:
-      state: Two-letter US state code (e.g. CA, NY)
+      state (str): Two-letter US state code (e.g. CA, NY)
 
     Returns:
-      str: A string containing the weather alerts for the given state.
+      str: A string containing the weather alerts for the given state or an error message.
     """
 
     app_logger.info(f"MCP SERVER: Getting weather alerts for {state}")
@@ -41,8 +41,8 @@ async def get_forecast(latitude: float, longitude: float) -> str:
     Get the forecast for a given latitude and longitude.
 
     Args:
-      latitude: The latitude of the location.
-      longitude: The longitude of the location.
+      latitude (float): The latitude of the location.
+      longitude (float): The longitude of the location.
 
     Returns:
       str: A string containing the forecast for the given latitude and longitude.
