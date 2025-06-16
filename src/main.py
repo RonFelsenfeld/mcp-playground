@@ -1,9 +1,10 @@
 from mcp.server.fastmcp import FastMCP
 
-from src.tools import get_weather_alerts, get_forecast
+from src.example_weather_mcp.tools import get_weather_alerts, get_forecast
 
 mcp = FastMCP("weather")
 
+# Weather tools
 mcp.add_tool(get_weather_alerts)
 mcp.add_tool(get_forecast)
 
