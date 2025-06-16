@@ -1,3 +1,4 @@
-from mcp.server.fastmcp import FastMCP
+from src.mcp_server import mcp
 
-mcp = FastMCP("weather")
+if __name__ == "__main__":
+    mcp.run(transport="stdio")

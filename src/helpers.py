@@ -3,7 +3,7 @@ from typing import Any
 
 from configs.logger_config import app_logger
 
-from src.constants import NWS_API_BASE, USER_AGENT
+from src.constants import USER_AGENT
 
 
 async def make_nws_request(url: str) -> dict[str, Any] | None:
@@ -51,3 +51,24 @@ def format_alert(feature: dict) -> str:
     Description: {props.get('description', 'No description available')}
     Instructions: {props.get('instruction', 'No specific instructions provided')}
     """
+
+
+def format_forecast(period: dict) -> str:
+    """
+    Format a forecast period into a readable string.
+
+    Args:
+        period (dict): The forecast period to format.
+
+    Returns:
+        str: The formatted forecast string.
+    """
+
+    forecast = f"""
+        {period['name']}:
+        Temperature: {period['temperature']}°{period['temperatureUnit']}
+        Wind: {period['windSpeed']} {period['windDirection']}
+        Forecast: {period['detailedForecast']}
+        """
+
+    return forecast
