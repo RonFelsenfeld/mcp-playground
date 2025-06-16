@@ -1,5 +1,13 @@
 # MCP Playground
 
+## Table of Contents
+
+- [Description](#description)
+- [Requirements](#requirements)
+- [Technologies and Tools](#technologies-and-tools)
+- [Local Installation Instructions](#local-installation-instructions)
+- [Available Make Commands](#available-make-commands)
+
 ## Description
 
 This project is a playground for MCP (Model Context Provider) implementations, featuring multiple microservices including a News MCP and Weather MCP. The services are implemented using MCP with stdio transport, providing a simple and efficient way to expose functionality through standard input/output streams.
@@ -12,16 +20,16 @@ This project is a playground for MCP (Model Context Provider) implementations, f
 
 ## Technologies and Tools
 
-- **MCP**: Model Context Provider for service communication
-- **uv**: Fast Python package installer and resolver
-- **Python-dotenv**: Environment variable management
+- `mcp[cli]`: Model Context Provider for service communication.
+- `httpx`: Modern HTTP client for Python.
+- `python-dotenv`: Environment variable management.
 
 ## Local Installation Instructions
 
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/RonFelsenfeld/mcp-playground.git
 cd mcp-playground
 ```
 
@@ -43,14 +51,18 @@ source .venv/bin/activate
 make sync
 ```
 
-5. Run the services:
-   - To run a specific MCP service:
+5. Run the MCP services:
+
+   - To run the News MCP service:
+
    ```bash
-   make run-file file=src/news_mcp/main.py
+   python -m src.news_mcp.main
    ```
-   - To run the server:
+
+   - To run the Weather MCP service:
+
    ```bash
-   make run-server
+   python -m src.weather_mcp.main
    ```
 
 ## Available Make Commands
@@ -58,18 +70,5 @@ make sync
 - `make setup`: Creates a new virtual environment
 - `make activate`: Shows activation command for the virtual environment
 - `make sync`: Syncs project dependencies
-- `make run-file`: Runs a specific Python file
-- `make run-server`: Starts the server
+- `make freeze-dependencies`: Freezes current dependencies to requirements.txt
 - `make clean`: Removes virtual environment and lock files
-
-## Project Structure
-
-```
-mcp-playground/
-├── src/
-│   ├── news_mcp/
-│   └── weather_mcp/
-├── Makefile
-├── requirements.txt
-└── README.md
-```
