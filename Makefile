@@ -18,11 +18,5 @@ sync:
 freeze-dependencies:
 	$(ACTIVATE) && uv pip freeze > requirements.txt
 
-run-file:
-	$(ACTIVATE) && uv run python $(if $(file),$(file),src/main.py)
-
-run-server:
-	$(ACTIVATE) && uvicorn src.main:app --reload
-
 clean:
 	rm -rf $(VENV) uv.lock
