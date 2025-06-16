@@ -7,6 +7,7 @@
 - [Technologies and Tools](#technologies-and-tools)
 - [Local Installation Instructions](#local-installation-instructions)
 - [Available Make Commands](#available-make-commands)
+- [Connecting with Claude Desktop](#connecting-with-claude-desktop)
 
 ## Description
 
@@ -20,9 +21,9 @@ This project is a playground for MCP (Model Context Provider) implementations, f
 
 ## Technologies and Tools
 
-- `mcp[cli]`: Model Context Provider for service communication.
-- `httpx`: Modern HTTP client for Python.
-- `python-dotenv`: Environment variable management.
+- `mcp[cli]`: Model Context Provider for service communication
+- `httpx`: Modern HTTP client for Python
+- `python-dotenv`: Environment variable management
 
 ## Local Installation Instructions
 
@@ -72,3 +73,54 @@ make sync
 - `make sync`: Syncs project dependencies
 - `make freeze-dependencies`: Freezes current dependencies to requirements.txt
 - `make clean`: Removes virtual environment and lock files
+
+## Connecting with Claude Desktop
+
+This project can be connected to Claude Desktop to test and interact with the MCP services using Anthropic's Model Context Protocol (MCP).
+
+1. Install Claude Desktop, available [here](https://claude.ai/download)
+
+2. Open Claude, go to Settings -> Developer
+3. Click "Edit Config"
+4. Open "claude_desktop_config.json" file
+5. Copy-paste the following JSON inside the file:
+
+```json
+{
+  "mcpServers": {
+    "weather": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "<YOUR_PROJECT_PATH>",
+        "run",
+        "-m",
+        "src.weather_mcp.main"
+      ]
+    },
+    "news": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "<YOUR_PROJECT_PATH>",
+        "run",
+        "-m",
+        "src.news_mcp.main"
+      ],
+      "env": {
+        "NEWS_API_KEY": "<YOUR_NEWS_API_KEY>"
+      }
+    }
+  }
+}
+```
+
+Replace `<YOUR_PROJECT_PATH>` with the absolute path to your project directory.
+
+For the News MCP service, you'll need a News API key from [newsdata.io](https://newsdata.io/). You can get a free API key by:
+
+1. Creating an account at newsdata.io
+2. Going to your dashboard
+3. Generating a new API key
+
+After generating you API key, replace `<YOUR_NEWS_API_KEY>` with it.
