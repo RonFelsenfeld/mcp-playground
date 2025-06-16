@@ -1,7 +1,7 @@
 from configs.logger_config import app_logger
 
-from src.example_weather_mcp.constants import NWS_API_BASE, FORMAT_SEPARATOR
-from src.example_weather_mcp.helpers import (
+from src.weather_mcp.constants import NWS_API_BASE, FORMAT_SEPARATOR
+from src.weather_mcp.helpers import (
     make_nws_request,
     format_alert,
     format_forecast,
