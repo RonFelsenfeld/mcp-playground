@@ -85,11 +85,19 @@ This project can be connected to Claude Desktop to test and interact with the MC
 4. Open "claude_desktop_config.json" file
 5. Copy-paste the following JSON inside the file:
 
+First, find the absolute path to your `uv` executable by running:
+
+```bash
+which uv
+```
+
+Then use the output path in the configuration:
+
 ```json
 {
   "mcpServers": {
     "weather": {
-      "command": "uv",
+      "command": "<ABSOLUTE_PATH_TO_UV>",
       "args": [
         "--directory",
         "<YOUR_PROJECT_PATH>",
@@ -99,7 +107,7 @@ This project can be connected to Claude Desktop to test and interact with the MC
       ]
     },
     "news": {
-      "command": "uv",
+      "command": "<ABSOLUTE_PATH_TO_UV>",
       "args": [
         "--directory",
         "<YOUR_PROJECT_PATH>",
@@ -115,7 +123,10 @@ This project can be connected to Claude Desktop to test and interact with the MC
 }
 ```
 
-Replace `<YOUR_PROJECT_PATH>` with the absolute path to your project directory.
+Replace:
+
+- `<ABSOLUTE_PATH_TO_UV>` with the output from `which uv` command
+- `<YOUR_PROJECT_PATH>` with the absolute path to your project directory
 
 For the News MCP service, you'll need a News API key from [newsdata.io](https://newsdata.io/). You can get a free API key by:
 
