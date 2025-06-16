@@ -1,6 +1,6 @@
 from httpx import AsyncClient
 
-from configs.logger_config import app_logger
+from src.configs.logger_config import app_logger
 
 from src.news_mcp.models import Article
 from src.news_mcp.helpers import get_news_params, normalize_news_data
