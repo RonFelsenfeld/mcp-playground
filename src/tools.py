@@ -1,3 +1,5 @@
+from configs.logger_config import app_logger
+
 from src.constants import NWS_API_BASE, FORMAT_SEPARATOR
 from src.helpers import make_nws_request, format_alert, format_forecast
 
@@ -13,6 +15,8 @@ async def get_weather_alerts(state: str) -> str:
       str: A string containing the weather alerts for the given state.
     """
 
+    app_logger.info(f"MCP SERVER: Getting weather alerts for {state}")
+
     url = f"{NWS_API_BASE}/alerts/active/area/{state}"
     data = await make_nws_request(url)
 
@@ -23,6 +27,8 @@ async def get_weather_alerts(state: str) -> str:
         return "No active alerts for this state."
 
     alerts = [format_alert(feature) for feature in data["features"]]
+    app_logger.info(f"MCP SERVER: Found {len(alerts)} alerts")
+
     return FORMAT_SEPARATOR.join(alerts)
 
 
@@ -38,6 +44,8 @@ async def get_forecast(latitude: float, longitude: float) -> str:
       str: A string containing the forecast for the given latitude and longitude.
     """
 
+    app_logger.info(f"MCP SERVER: Getting forecast for {latitude}, {longitude}")
+
     points_url = f"{NWS_API_BASE}/points/{latitude},{longitude}"
     points_data = await make_nws_request(points_url)
 
@@ -52,5 +60,7 @@ async def get_forecast(latitude: float, longitude: float) -> str:
 
     periods = forecast_data["properties"]["periods"]
     forecasts = [format_forecast(period) for period in periods[:5]]
+
+    app_logger.info(f"MCP SERVER: Found {len(forecasts)} forecasts")
 
     return FORMAT_SEPARATOR.join(forecasts)
