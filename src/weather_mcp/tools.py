@@ -1,4 +1,4 @@
-from configs.logger_config import app_logger
+from src.configs.logger_config import app_logger
 
 from src.weather_mcp.constants import NWS_API_BASE, FORMAT_SEPARATOR
 from src.weather_mcp.helpers import (

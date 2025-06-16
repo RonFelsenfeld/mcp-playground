@@ -1,7 +1,7 @@
 import httpx
 from typing import Any
 
-from configs.logger_config import app_logger
+from src.configs.logger_config import app_logger
 
 from src.weather_mcp.constants import USER_AGENT
 
