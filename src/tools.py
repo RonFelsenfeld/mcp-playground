@@ -1,12 +1,7 @@
-from mcp.server.fastmcp import FastMCP
-
 from src.constants import NWS_API_BASE, FORMAT_SEPARATOR
 from src.helpers import make_nws_request, format_alert, format_forecast
 
-mcp = FastMCP("weather")
 
-
-@mcp.tool()
 async def get_weather_alerts(state: str) -> str:
     """
     Get weather alerts for a given US state.
@@ -31,7 +26,6 @@ async def get_weather_alerts(state: str) -> str:
     return FORMAT_SEPARATOR.join(alerts)
 
 
-@mcp.tool()
 async def get_forecast(latitude: float, longitude: float) -> str:
     """
     Get the forecast for a given latitude and longitude.
