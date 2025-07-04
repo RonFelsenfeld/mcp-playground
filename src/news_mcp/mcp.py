@@ -1,4 +1,5 @@
 from httpx import AsyncClient
+from mcp.server.fastmcp import FastMCP
 
 from src.configs.logger_config import app_logger
 
@@ -6,7 +7,10 @@ from src.news_mcp.models import Article
 from src.news_mcp.helpers import get_news_params, normalize_news_data
 from src.news_mcp.constants import API_BASE
 
+news_mcp = FastMCP("news")
 
+
+@news_mcp.tool()
 async def get_latest_news(query: str, language: str = "en") -> list[Article]:
     """
     Get the latest news for a given query and language.
